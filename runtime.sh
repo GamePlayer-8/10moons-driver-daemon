@@ -10,7 +10,7 @@ BUILD_RUNTIME="${BUILD_RUNTIME:-/tmp}"
 build_dir="${BUILD_RUNTIME}/build"
 
 distros=('debian' 'alpine' 'vanilla')
-package_version="1.0.${3:-1}"
+package_version="${3:-1}"
 
 build() {
     cp -r rootfs /tmp/rootfs

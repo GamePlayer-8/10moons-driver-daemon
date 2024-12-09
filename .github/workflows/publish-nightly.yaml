@@ -28,6 +28,13 @@ jobs:
           swap-size-mb: 1024
           remove-dotnet: 'true'
       
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -61,6 +68,13 @@ jobs:
     if: failure()
 
     steps:
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -89,6 +103,13 @@ jobs:
           swap-size-mb: 1024
           remove-dotnet: 'true'
       
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -122,6 +143,13 @@ jobs:
     if: failure()
 
     steps:
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -147,6 +175,13 @@ jobs:
       (needs.vanilla.result == 'success' && needs.vanilla-fallback.result == 'skipped') ||
       (needs.vanilla.result == 'failure' && needs.vanilla-fallback.result == 'success')
     steps:
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -189,6 +224,13 @@ jobs:
     if: always() &&
         (needs.debian.result == 'failure')
     steps:
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -223,6 +265,13 @@ jobs:
       (needs.vanilla-alpine.result == 'success' && needs.vanilla-alpine-fallback.result == 'skipped') ||
       (needs.vanilla-alpine.result == 'failure' && needs.vanilla-alpine-fallback.result == 'success')
     steps:
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
@@ -274,6 +323,13 @@ jobs:
     if: always() &&
         (needs.alpine.result == 'failure')
     steps:
+      - name: Install git
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y git
+          sudo apt-get autopurge -y
+          sudo apt-get clean
+          
       - name: Checkout branch
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
         with:
