@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        echo "Triggering initramfs cleanup for the removed kernel..."
+        if [ -n "$2" ]; then
+            update-initramfs -d -k "$2" || exit 1
+        fi
+        ;;
+esac
+
+exit 0

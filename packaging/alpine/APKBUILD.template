@@ -1,0 +1,23 @@
+_pkgver=PACKVER-10moons-driver
+pkgname=10moons-driver
+pkgver=PACKVER
+arch=noarch
+url="https://git.chimmie.k.vu/GamePlayer-8/10moons-driver-daemon"
+maintainer="Chimmie Firefly <gameplayer2019pl@tutamail.com>"
+pkgrel=0
+pkgdesc="The 10moons Daemon Driver"
+depends="initramfs-generator python3 py3-evdev py3-usb py3-yaml"
+makedepends="tar gzip"
+options="!strip !check"
+license="MIT"
+source="raw.tar.gz"
+builddir="$srcdir/.."
+
+package() {
+	cd "$builddir/src"
+	install -D -m755 etc/init.d/10moons-driver ${pkgdir}/etc/init.d-openrc/10moons-driver
+	install -D -m644 etc/10moons-driver/config.yaml ${pkgdir}/etc/10moons-driver/config.yaml
+	install -D -m644 etc/modules-load.d/10moons-driver.conf ${pkgdir}/etc/modules-load.d/10moons-driver.conf
+	install -D -m755 usr/bin/10moons-driver ${pkgdir}/usr/bin/10moons-driver
+	install -D -m644 usr/share/10moons-driver/config.yaml ${pkgdir}/usr/share/10moons-driver/config.yaml
+}

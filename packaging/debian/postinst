@@ -1,0 +1,11 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        echo "Triggering initramfs rebuild for all installed kernels..."
+        update-initramfs -u -k all || exit 1
+        ;;
+esac
+
+exit 0

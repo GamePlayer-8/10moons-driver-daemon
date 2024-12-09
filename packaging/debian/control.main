@@ -1,0 +1,7 @@
+Package: 10moons-driver
+Version: PACKVER
+Architecture: all
+Maintainer: Chimmie Firefly <gameplayer2019pl@tutamail.com>
+Description: Debian 10moons-driver
+ Simple daemon driver for 10moons T503 tablet.
+Depends: initramfs-tools, python3, python3-evdev, python3-usb1, python3-yaml
