@@ -26,6 +26,8 @@ on:
 env:
   DEBIAN_FRONTEND: 'noninteractive'
   TZ: Etc/UTC
+  tag: ${{ github.event.inputs.tag || github.ref_name || 'v1.0' }}
+  prev_tag: ${{ github.event.inputs.tag || github.ref_name || 'v1.0' }}
 
 jobs:
   vanilla:
@@ -480,22 +482,22 @@ jobs:
         id: prev_tag
         run: |
           # Find the previous tag, excluding the current tag
-          prev_tag=$(git describe --abbrev=0 --tags --exclude="$(git describe --abbrev=0 --tags ${{ steps.set_tag.outputs.tag }})")
+          prev_tag=$(git describe --abbrev=0 --tags --exclude="${{ env.tag }}")
           echo "prev_tag=${prev_tag}" >> $GITHUB_ENV
 
       - name: Publish release
         uses: notpeelz/action-gh-create-release@v5.0.1
         with:
           target: ${{ inputs.target }}
-          tag: ${{ steps.set_tag.outputs.tag }}
+          tag: ${{ env.tag }}
           prerelease: ${{ inputs.prerelease }}
           draft: false
           strategy: replace
-          title: Release ${{ steps.set_tag.outputs.tag }}
+          title: Release ${{ env.tag }}
           body: |
               ## Changelog
 
-              Changes since the last release: [${{ steps.prev_tag.outputs.prev_tag }}...${{ steps.set_tag.outputs.tag }}](https://github.com/${{ github.repository }}/compare/${{ steps.prev_tag.outputs.prev_tag }}...${{ steps.set_tag.outputs.tag }})
+              Changes since the last release: [${{ env.prev_tag }}...${{ env.tag }}](https://github.com/${{ github.repository }}/compare/${{ env.prev_tag }}...${{ env.tag }})
 
               ---
               
