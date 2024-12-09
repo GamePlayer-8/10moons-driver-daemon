@@ -29,7 +29,7 @@ env:
 
 jobs:
   vanilla:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Maximize build space
@@ -90,7 +90,7 @@ jobs:
           path: packages/raw.tar.gz
 
   vanilla-alpine:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Maximize build space
@@ -151,7 +151,7 @@ jobs:
           path: packages/raw-alpine.tar.gz
 
   debian:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [vanilla, vanilla-fallback]
     if: |
       always() && 
@@ -227,7 +227,7 @@ jobs:
           path: packages/debian/10moons-driver.deb
 
   alpine:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [vanilla-alpine, vanilla-alpine-fallback]
     if: |
       always() && 
@@ -320,7 +320,7 @@ jobs:
           path: packages/alpine/alpine-apk.tar.lzo
 
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: [debian, debian-fallback, alpine, alpine-fallback]
     if: |
       always() && 
@@ -364,9 +364,9 @@ jobs:
         id: set_tag
         run: |
           if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
-            echo "::set-output name=tag::${{ github.event.inputs.tag }}"
+            echo "tag=${{ github.event.inputs.tag }}" >> $GITHUB_ENV
           else
-            echo "::set-output name=tag::$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')"
+            echo "tag=$(echo "${{ github.ref }}" | sed 's/refs\/tags\///')" >> $GITHUB_ENV
           fi
 
       - name: Get previous tag
@@ -374,7 +374,7 @@ jobs:
         run: |
           # Find the previous tag, excluding the current tag
           prev_tag=$(git describe --abbrev=0 --tags --exclude="$(git describe --abbrev=0 --tags ${{ steps.set_tag.outputs.tag }})")
-          echo "::set-output name=prev_tag::${prev_tag}"
+          echo "prev_tag=${prev_tag}" >> $GITHUB_ENV
 
       - name: Publish release
         uses: notpeelz/action-gh-create-release@v5.0.1
