@@ -1,0 +1,14 @@
+[Unit]
+Description=10moons T503 Graphics Tablet Driver Daemon
+After=logger.service udev.service
+Wants=logger.service
+
+[Service]
+ExecStart=/usr/local/bin/10moons-driver
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=10moons-driver
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,13 @@
+#!/sbin/openrc-run
+
+name="10moons-driver"
+description="A driver daemon for 10moons T503 Graphics Tablet"
+supervisor=supervise-daemon
+command=/usr/local/bin/10moons-driver
+output_logger="logger -t '${RC_SVCNAME}' -p daemon.info"
+error_logger="logger -t '${RC_SVCNAME}' -p daemon.error"
+
+depend() {
+	use logger
+	need udev
+}
