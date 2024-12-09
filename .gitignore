@@ -1,2 +1,11 @@
+builds/
+build/
+packages/
+source/
+packaging/alpine/pkg/
+packaging/alpine/keys/
+packaging/alpine/APKBUILD
+packaging/alpine/raw.tar.gz
+packaging/alpine/src/
 env
 .vscode
