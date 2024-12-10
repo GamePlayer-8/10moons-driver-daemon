@@ -43,7 +43,7 @@ package() {
                 mkdir -p "${package_dir}"
                 cp /dist/raw-alpine.tar.gz "${package_dir}/raw.tar.gz"
                 cp "${build_dir}/alpine/APKBUILD.template" "${package_dir}/APKBUILD"
-                sed -i "s/PACKVER/${package_version}/g" "${package_dir}/APKBUILD"
+                sed -i "s/PACKVER/$(echo "${package_version}" | sed -e 's/nightly/0/g')/g" "${package_dir}/APKBUILD"
                 output_dir="${build_dir}"
                 BUILDUSER="abuilder"
                 adduser "$BUILDUSER" -D || true
